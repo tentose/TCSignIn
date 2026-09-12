@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TC Sign-In Shortcut Builder (Experimental)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Transparent Classroom Sign-In Shortcuts</h1>
+    <p class="subtitle">
+      Generate an iOS Shortcut that automatically signs your child in or out
+      on the school's Transparent Classroom dropoff/pickup page.
+    </p>
+
+    <div class="notice">
+      <strong>Heads up:</strong> Apple now requires <code>.shortcut</code> files to be
+      cryptographically signed by the Shortcuts app before they can be imported, which
+      isn't possible from a static web page. Downloading below likely won't import
+      successfully on current iOS versions. Use the
+      <a href="index.html">manual setup page</a> instead &mdash; it walks you through
+      building the shortcut yourself and pasting in the generated script.
+    </div>
+
+    <form id="builderForm" onsubmit="return false;">
+      <label for="pin">Your PIN</label>
+      <input type="text" id="pin" inputmode="numeric" autocomplete="off" placeholder="e.g. 123456">
+
+      <label for="childName">Child's name</label>
+      <input type="text" id="childName" autocomplete="off" placeholder="e.g. Jamie">
+      <p class="hint">A case-insensitive partial match is used, so "jam" will match "Jamie L".</p>
+
+      <div class="buttons">
+        <button type="button" id="downloadDropoff" class="btn btn-dropoff">Download Dropoff Shortcut</button>
+        <button type="button" id="downloadPickup" class="btn btn-pickup">Download Pickup Shortcut</button>
+      </div>
+    </form>
+
+    <p id="status" class="status"></p>
+
+    <section class="instructions">
+      <h2>How to install</h2>
+      <ol>
+        <li>Tap a download button above (best done in Safari on your iPhone).</li>
+        <li>Open the downloaded <code>.shortcut</code> file (e.g. from the Files app or the download banner) and tap <strong>Add Shortcut</strong>.</li>
+        <li>If you see an "Untrusted Shortcut" warning, run the shortcut once, then enable
+          <strong>Settings &gt; Shortcuts &gt; Advanced &gt; Allow Untrusted Shortcuts</strong> and try importing again.</li>
+        <li>Add the shortcut to your Home Screen (Shortcuts app &gt; shortcut &gt; ⋯ &gt; Add to Home Screen) for one-tap access.</li>
+      </ol>
+      <p class="hint">
+        Your PIN and child's name are embedded directly into the downloaded file and are never sent anywhere &mdash;
+        this page runs entirely in your browser.
+      </p>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/bplist-writer.js"></script>
+  <script src="js/injected-script.js"></script>
+  <script src="js/shortcut-file-builder.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

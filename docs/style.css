@@ -108,3 +108,56 @@ input[type="text"] {
   padding-left: 20px;
   line-height: 1.5;
 }
+
+.notice {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  color: #6d4c00;
+}
+
+.notice a { color: #6d4c00; font-weight: 600; }
+
+.output {
+  margin-top: 20px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.output h2 {
+  font-size: 1.05rem;
+  margin: 16px 0 6px;
+}
+
+.output h2:first-child {
+  margin-top: 0;
+}
+
+.copy-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.copy-row input[type="text"],
+.copy-row textarea {
+  flex: 1 1 auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fafafa;
+  resize: vertical;
+}
+
+.btn-copy {
+  flex: 0 0 auto;
+  background: #444;
+  align-self: flex-start;
+}
+

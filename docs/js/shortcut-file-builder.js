@@ -6,7 +6,7 @@
 (function (global) {
   'use strict';
 
-  const SCHOOL_URL = 'https://www.transparentclassroom.com/dd/_mFNm2RxfzHdTkT1ouDw?locale=en';
+  const SCHOOL_URL = global.TCSignInConfig.SCHOOL_URL;
 
   const ICONS = {
     Dropoff: { color: 4274264319, glyph: 61440 }, // green

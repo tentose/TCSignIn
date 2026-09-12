@@ -3,16 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TC Sign-In Shortcut Builder</title>
+<title>TC Sign-In Shortcut Setup</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="card">
     <h1>Transparent Classroom Sign-In Shortcuts</h1>
     <p class="subtitle">
-      Generate an iOS Shortcut that automatically signs your child in or out
-      on the school's Transparent Classroom dropoff/pickup page.
+      Get a piece of JavaScript you can paste into a Shortcuts action to
+      automatically sign your child in or out on the school's Transparent
+      Classroom dropoff/pickup page.
     </p>
+
+    <div class="notice">
+      Apple requires <code>.shortcut</code> files to be signed by the Shortcuts
+      app before they can be imported, so this page can't hand you a ready-made
+      file anymore. Instead, fill in the form below, then follow the
+      instructions to build a tiny shortcut yourself (takes about a minute)
+      and paste in the generated script.
+    </div>
 
     <form id="builderForm" onsubmit="return false;">
       <label for="pin">Your PIN</label>
@@ -23,32 +32,49 @@
       <p class="hint">A case-insensitive partial match is used, so "jam" will match "Jamie L".</p>
 
       <div class="buttons">
-        <button type="button" id="downloadDropoff" class="btn btn-dropoff">Download Dropoff Shortcut</button>
-        <button type="button" id="downloadPickup" class="btn btn-pickup">Download Pickup Shortcut</button>
+        <button type="button" id="generateDropoff" class="btn btn-dropoff">Generate Dropoff Script</button>
+        <button type="button" id="generatePickup" class="btn btn-pickup">Generate Pickup Script</button>
       </div>
     </form>
 
     <p id="status" class="status"></p>
 
+    <section id="output" class="output" hidden>
+      <h2>1. The page to open</h2>
+      <p class="hint">Use this as the URL for the "Open URLs" action.</p>
+      <div class="copy-row">
+        <input type="text" id="schoolUrlField" readonly>
+        <button type="button" id="copyUrl" class="btn btn-copy">Copy</button>
+      </div>
+
+      <h2>2. The script to run</h2>
+      <p class="hint">Paste this into the "Run JavaScript on Webpage" action.</p>
+      <div class="copy-row">
+        <textarea id="scriptField" readonly rows="8"></textarea>
+        <button type="button" id="copyScript" class="btn btn-copy">Copy</button>
+      </div>
+    </section>
+
     <section class="instructions">
-      <h2>How to install</h2>
+      <h2>How to build the shortcut</h2>
       <ol>
-        <li>Tap a download button above (best done in Safari on your iPhone).</li>
-        <li>Open the downloaded <code>.shortcut</code> file (e.g. from the Files app or the download banner) and tap <strong>Add Shortcut</strong>.</li>
-        <li>If you see an "Untrusted Shortcut" warning, run the shortcut once, then enable
-          <strong>Settings &gt; Shortcuts &gt; Advanced &gt; Allow Untrusted Shortcuts</strong> and try importing again.</li>
-        <li>Add the shortcut to your Home Screen (Shortcuts app &gt; shortcut &gt; ⋯ &gt; Add to Home Screen) for one-tap access.</li>
+        <li>Fill in your PIN and child's name above, then tap <strong>Generate Dropoff Script</strong> or <strong>Generate Pickup Script</strong>.</li>
+        <li>Open the <strong>Shortcuts</strong> app on your iPhone and tap <strong>+</strong> to create a new shortcut.</li>
+        <li>Tap <strong>Add Action</strong>, search for <strong>"Open URLs"</strong>, and add it. Paste in the URL from step 1 above.</li>
+        <li>Tap <strong>Add Action</strong> again, search for <strong>"Run JavaScript on Webpage"</strong>, and add it. Paste in the script from step 2 above.</li>
+        <li>Tap the shortcut's name at the top to rename it (e.g. "Dropoff" or "Pickup"), then tap <strong>Done</strong>.</li>
+        <li>Add it to your Home Screen for one-tap access: open the shortcut's settings (⋯) &gt; <strong>Add to Home Screen</strong>.</li>
       </ol>
       <p class="hint">
-        Your PIN and child's name are embedded directly into the downloaded file and are never sent anywhere &mdash;
-        this page runs entirely in your browser.
+        Your PIN and child's name are only used to build the script shown above and are never sent anywhere &mdash;
+        this page runs entirely in your browser. Once pasted into your own shortcut, only Apple's Shortcuts app
+        and the school's website ever see them.
       </p>
     </section>
   </main>
 
-  <script src="js/bplist-writer.js"></script>
+  <script src="js/config.js"></script>
   <script src="js/injected-script.js"></script>
-  <script src="js/shortcut-file-builder.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/manual-app.js"></script>
 </body>
 </html>
