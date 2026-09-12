@@ -62,7 +62,7 @@
         <li>Open the <strong>Shortcuts</strong> app on your iPhone and tap <strong>+</strong> to create a new shortcut.</li>
         <li>Tap <strong>Add Action</strong>, search for <strong>"Open URLs"</strong>, and add it. Paste in the URL from step 1 above.</li>
         <li>Tap <strong>Add Action</strong> again, search for <strong>"Run JavaScript on Webpage"</strong>, and add it. Paste in the script from step 2 above.</li>
-        <li>Tap <strong>Add Action</strong> once more, search for <strong>"Show Result"</strong>, and add it right after "Run JavaScript on Webpage" &mdash; this shows you the status message so you can tell what happened (see Debugging below).</li>
+        <li>(Optional) Tap <strong>Add Action</strong>, search for <strong>"Show Result"</strong>, and add it right after "Run JavaScript on Webpage" to display the status message when run.</li>
         <li>Tap the shortcut's name at the top to rename it (e.g. "Dropoff" or "Pickup"), then tap <strong>Done</strong>.</li>
         <li>Add it to your Home Screen for one-tap access: open the shortcut's settings (⋯) &gt; <strong>Add to Home Screen</strong>.</li>
       </ol>
@@ -74,44 +74,9 @@
       <p class="hint">
         <strong>Safety switch:</strong> the generated script has a <code>CLICK_DONE_BUTTON</code> variable near
         the top, set to <code>false</code> by default. With it off, the shortcut fills in the PIN, child, mode,
-        and signature but stops just before the final "Done" tap, so you can test it safely. Once you've confirmed
-        it works (see Debugging below), edit the pasted script in the Shortcuts action and change it to
-        <code>true</code> so the shortcut completes sign-in/out automatically.
+        and signature but stops just before the final "Done" tap, so you can test it safely. Once verified,
+        edit the script in the Shortcuts action and change it to <code>true</code> to complete sign-in/out automatically.
       </p>
-    </section>
-
-    <section class="instructions">
-      <h2>Debugging</h2>
-      <ol>
-        <li>
-          Add a <strong>"Show Result"</strong> action right after "Run JavaScript on Webpage" (see step 5 above).
-          Running the shortcut will now display a message: <code>READY: ...</code> means it got all the way
-          through but stopped before Done (expected while <code>CLICK_DONE_BUTTON</code> is false);
-          <code>OK: ...</code> means it fully signed in/out; <code>ERROR: ...</code> means it got stuck on a
-          specific step &mdash; the message tells you which one (e.g. "Timed out waiting for the next step").
-        </li>
-        <li>
-          If it's stuck, first try running the shortcut again slowly and watch what actually happens on screen
-          (PIN filled in? Child tile selected? Signature drawn?) to see which step it stopped at.
-        </li>
-        <li>
-          For a much faster debug loop, open the school's page in <strong>Safari on your Mac</strong>
-          (or iPhone), open Developer Tools / the JavaScript console, paste the script from step 2 above directly
-          into the console, and press Enter. You'll see any errors immediately instead of waiting on Shortcuts.
-        </li>
-        <li>
-          You can also inspect the live iPhone page from a Mac: enable
-          <strong>Settings &gt; Safari &gt; Advanced &gt; Web Inspector</strong> on the iPhone, connect it to your
-          Mac via cable, then on the Mac open Safari's <strong>Develop</strong> menu, select your iPhone, and pick
-          the open tab to see the console and inspect elements while the shortcut runs.
-        </li>
-        <li>
-          A common cause of failures is the school's website changing its button labels, CSS classes, or page
-          flow &mdash; the script matches on visible text like "Sign", "Done", and the child's name, plus a few
-          CSS selectors for the child tiles and signature canvas. If Transparent Classroom updates their site,
-          those matches may need to be regenerated/updated here.
-        </li>
-      </ol>
     </section>
   </main>
 

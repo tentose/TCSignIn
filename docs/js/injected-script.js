@@ -62,18 +62,12 @@
 
   function findButtonByText(label) {
     var target = label.trim().toLowerCase();
-    var candidates = Array.prototype.slice.call(document.querySelectorAll('button, input[type="submit"], a.btn, a[role="button"]'));
+    var candidates = Array.prototype.slice.call(document.querySelectorAll('button, input[type="submit"], input[type="button"], a.btn, a[role="button"]'));
     for (var i = 0; i < candidates.length; i++) {
       var el = candidates[i];
       if (!isVisible(el)) continue;
       var text = textOf(el).toLowerCase();
       if (text === target) return el;
-    }
-    // Fall back to a "starts with" / "contains" match (e.g. "Sign in" vs "Sign").
-    for (var j = 0; j < candidates.length; j++) {
-      var el2 = candidates[j];
-      if (!isVisible(el2)) continue;
-      if (textOf(el2).toLowerCase().indexOf(target) === 0) return el2;
     }
     return null;
   }
