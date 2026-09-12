@@ -7,6 +7,11 @@
  * a signature -> Done. The site uses Turbo (Hotwire) navigation, so the
  * page never fully reloads between these steps and a single injected
  * script can drive the whole flow by polling the DOM for each stage.
+ *
+ * By default the generated script stops right before clicking "Done" (see
+ * the CLICK_DONE_BUTTON flag near the top of the generated code), so you
+ * can safely test/run the shortcut repeatedly without actually signing your
+ * child in or out until you're ready to flip that flag to true.
  */
 (function (global) {
   'use strict';
@@ -19,6 +24,11 @@
     const modeLiteral = JSON.stringify(mode); // "Dropoff" or "Pickup"
 
     return `(function () {
+  // Set to true to actually click "Done" and complete the sign-in/out.
+  // Defaults to false so you can safely test the shortcut (it will fill
+  // in everything and stop right before the final, irreversible click).
+  var CLICK_DONE_BUTTON = false;
+
   var PIN = ${pinLiteral};
   var CHILD_NAME = ${nameLiteral};
   var MODE = ${modeLiteral};
@@ -165,6 +175,9 @@
     while (Date.now() < deadline) {
       var doneBtn = findButtonByText('Done');
       if (doneBtn && isVisible(doneBtn) && scribbled) {
+        if (!CLICK_DONE_BUTTON) {
+          return 'READY: ' + MODE + ' filled in for ' + CHILD_NAME + ' (Done button NOT clicked; set CLICK_DONE_BUTTON = true to finish automatically)';
+        }
         clickEl(doneBtn);
         return 'OK: ' + MODE + ' signed for ' + CHILD_NAME;
       }
