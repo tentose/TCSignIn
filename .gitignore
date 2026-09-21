@@ -9,3 +9,9 @@ node_modules/
 
 # Recorded browser session data (may contain personal/session info)
 /recordings/
+
+# Archived browser-script artifacts
+/experiments/browser-script/node_modules/
+/experiments/browser-script/playwright-report/
+/experiments/browser-script/recordings/
+/experiments/browser-script/test-results/
